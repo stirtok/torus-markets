@@ -1,0 +1,16 @@
+
+*off-git*
+*off git*
+
+.calva/
+.cpcache/
+.lsp/
+.shadow-cljs/
+.vscode/
+
+.DS_Store
+.nrepl-port
+.RData
+.Rhistory
+
+node_modules/

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Torus Markets">
+  <meta name="keywords" content="Convex, StirTok, distributed ledger, automated market maker, Clojurescript">
+  <meta name="author" content="Ashley McClenaghan">
+  <meta property="og:url" content="https://stirtok.github.io/torus-markets" />
+  <meta property="og:title" content="Torus Markets" />
+  <meta property="og:description"
+    content="This app displays data about the Torus markets data that is on the Convex distributed ledger." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/stirtok-logo.png" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Convex Torus Markets</title>
+  <link rel="icon" href="img/stirtok-logo.png" />
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+  <style>
+    :root {
+      --color-bg: #fff1e5;
+    }
+
+    nav {
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .dropleft {
+    left: auto;
+    right: 0;
+}
+
+    img {
+      margin: 0 !important;
+    }
+
+    header {
+      padding: 0;
+    }
+
+    main {
+      padding-top: 0;
+    }
+
+    fieldset {
+      border-style: none;
+    }
+
+    fieldset label {
+      display: inline-block;
+    }
+
+    .tooltip {
+      display: inline;
+      position: relative;
+    }
+
+    .tooltip:hover:after {
+      background: #333;
+      background: rgba(0, 0, 0, .8);
+      border-radius: 5px;
+      bottom: 26px;
+      color: #fff;
+      content: attr(data-tooltip);
+      left: 10px;
+      padding: 5px 15px;
+      position: absolute;
+      z-index: 98;
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body class="has-navbar-fixed-top">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="app"></div>
+  <script>
+    // check URL for ?# and if not found then redirect to the base ?# route
+    if (!window.location.href.match(/\?#/)) {
+      redirectUrl = window.location.origin + window.location.pathname + '?#' + window.location.search;
+      console.log(window.location.href + ' -> ' + redirectUrl);
+      window.location.href = redirectUrl;
+    }
+  </script>
+
+  <script src="js/torus-markets.js"></script>
+  <script>stirtok.torus_markets.init();</script>
+</body>
+
+</html>
