@@ -17,7 +17,7 @@
           :src    "img/convex-logo.png"
           :height "30"}]
    [:h3 "Convex Torus Markets"]
-   [:ul [:li "Menu ▼" 
+   [:ul [:li [:span {:style {:cursor "default"}} #_"🟰" "Menu ▼"] 
          (let [current (-> (listen [:route]) :data :name)]
            [:ul.dropleft {:style {:bgcolor "white"}}
             [:li (nav-item current :stirtok.torus-markets.router/markets-view "Markets")]

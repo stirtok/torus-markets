@@ -9,6 +9,14 @@
   []
   (let [{:keys [timestamp torus-markets]
          :as   markets-data} (listen [:markets])
+        headers                                             [["Token name" "left"]
+                                                             ["Token addr" "left"] 
+                                                             ["Mkt addr" "left"]
+                                                             [[:span "Amt CVM" [:sup "1"] " in pool"] "right"] 
+                                                             ["Amt token in pool" "right"]
+                                                             [[:span "Price" [:sup "1"]] "right"] 
+                                                             [[:span "Buy quote" [:sup "1"]] "center"] 
+                                                             [[:span "Sell quote" [:sup "1"]] "right"]]
         cols                                                [[:token-name "left"] [:token-addr "right"] [:market-addr "right"]
                                                              [:pool-cvm "right"] [:pool-token "right"]
                                                              [:price "right"] [:buy-quote "right"] [:sell-quote "right"]]
@@ -18,7 +26,7 @@
                                                                         (assoc m
                                                                                ;; Format the name as a tooltip.
                                                                                :token-name (let [m2 (:token-reg m)]
-                                                                                             [:span.tooltip {:data-tooltip (or (:desc m2) (:description m2))} (:name m2)])
+                                                                                             [:span.tooltip {:style {:cursor "default"} :data-tooltip (or (:desc m2) (:description m2))} (:name m2)])
                                                                                ;; Format number values.
                                                                                :pool-cvm (let [x (:pool-cvm m)] (if (number? x) (util/fmt-int x) x))
                                                                                :pool-token (let [x (:pool-token m)] (if (number? x) (util/fmt-int x) x))
@@ -46,12 +54,16 @@
      [:section
       [:table
        [:thead
-        [:tr (for [[k ta] cols]
-               [:th {:style {:text-align ta}} (name k)])]]
-       [:tbody (for [m tdata]
-                 [:tr (for [[k ta] cols]
-                        [:td {:style {:text-align ta}} (k m)])])]]]
-     [:p [:small "Convex timestamp: " timestamp [:br]
+        [:tr (for [[ix [header text-align]] (map-indexed vector headers)]
+               [:th {:key   ix
+                     :style {:text-align text-align}} header])]]
+       [:tbody (for [[iy row-map] (map-indexed vector tdata)]
+                 [:tr {:key iy}
+                  (for [[ix [col-key text-align]] (map-indexed vector cols)]
+                    [:td {:key   (str iy "_" ix)
+                          :style {:text-align text-align}} (get row-map col-key)])])]]]
+     [:p [:small [:smaller [:sup "1"]] "In Convex " [:em  "copper"] " (the utility token of the distributed ledger)" [:br] 
+          "Convex timestamp: " timestamp [:br]
           "Download this data as: " 
           [:a {:href     (js/encodeURI (str "data:application/edn;charset=utf-8," edn-str))
                :download "torus-markets-data.edn"} "EDN"]
