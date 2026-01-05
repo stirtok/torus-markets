@@ -20,7 +20,7 @@
         cols                                                [[:token-name "left"] [:token-addr "right"] [:market-addr "right"]
                                                              [:pool-cvm "right"] [:pool-token "right"]
                                                              [:price "right"] [:buy-quote "right"] [:sell-quote "right"]]
-        torus-markets                                       (sort-by :market-addr torus-markets)
+        torus-markets                                       (sort-by #(js/parseInt (subs (:token-addr %) 1)) torus-markets)
         tdata                                               (->> torus-markets
                                                                  (map (fn [m]
                                                                         (assoc m

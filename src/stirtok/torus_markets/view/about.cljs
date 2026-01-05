@@ -14,7 +14,8 @@
     
     [:dt "Purpose of this web app"]
     [:dd [:span "This app displays data about the Torus markets data that is on the Convex distributed ledger." [:br]
-          "Its purpose is to be a learning example and a starting point for future app development."]]
+          "Its purpose is to be a learning example and a starting point for future app development." [:br]
+          "(Torus is an Automated Market Maker, i.e. an AMM.)"]]
     
     [:dt "Author of this web app"] 
     [:dd "The "
