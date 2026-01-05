@@ -8,10 +8,11 @@
 (rf/reg-event-db
  :initialise-db
  (fn [_ _]
-   {:route  {:data {:name :torus-markets.router/markets-view
-                    :view markets-view/root}}
-    :status {:ok? true
-             :msg ""}}))
+   {:route              {:data {:name :torus-markets.router/markets-view
+                                :view markets-view/root}}
+    :display-when-zero? false
+    :status             {:ok? true
+                         :msg ""}}))
 
 (rf/reg-event-db
  :set-status
@@ -23,6 +24,12 @@
  (fn [db [_ v]]
    (tap> v)
    (assoc db :route v)))
+
+(rf/reg-event-db
+ :set-display-when-zero?
+ (fn [db [_ v]]
+   (tap> v)
+   (assoc db :display-when-zero? v)))
 
 (rf/reg-event-fx
  :fetch-markets
